@@ -1,7 +1,12 @@
 package com.techelevator.view;
 
+import java.util.InputMismatchException;
+import java.util.Scanner;
+
 public class Application {
     public static void main(String[] args) throws InterruptedException {
+
+        Scanner sc = new Scanner(System.in);
 
         System.out.println("---------------------------------------");
         Thread.sleep(500);
@@ -10,35 +15,69 @@ public class Application {
         System.out.println("---------------------------------------");
         Thread.sleep(2000);
 
-        VendingMachineClass vendoMatic = new VendingMachineClass();
-        MainMenu mainMenu = new MainMenu();
-        mainMenu.provideMenu();
-        int userInput = vendoMatic.getUserInput();
+        run();
 
-        if(userInput == 1){
-            vendoMatic.displayItems();
-        }
-        else if (userInput == 2){
-            PurchaseMenu purchaseMenu = new PurchaseMenu();
-            purchaseMenu.provideMenu();
-            int pMInput = vendoMatic.getUserInput();
-            if(pMInput == 1){
-                purchaseMenu.feedMoney();
-            }
-            Thread.sleep(500);
 
-        }
-        else if (userInput == 3) {
-            System.out.println("Do this");
-        }
-        else if (userInput == 4){
-            SecretMenu secretMenu = new SecretMenu();
-            secretMenu.provideMenu();
-
-        }
-        else {
-            System.out.println("Hey dummy enter in a number");
-        }
+//        VendingMachine vendoMatic800 = new VendingMachine();
+//        Menu mainMenu = new Menu();
+//        mainMenu.mainMenu();
+//        System.out.println("Please make a selection from the following: ");
+//        int userChoice = mainMenu.getChoiceFromOptions();
+//
+//        if(userChoice == 1) {
+//            boolean repeat = true;
+//            vendoMatic800.displayItems();
+//            System.out.print("Press 0 to return to main menu!");
+//
+//
+//            try {
+//                while (repeat) {
+//                    int returnChoice = sc.nextInt();
+//                    if (returnChoice == 0) {
+//                        mainMenu.mainMenu();
+//                        repeat = false;
+//                    } else {
+//                        System.out.println("Please enter 0 to return to main menu!");
+//                    }
+//                }
+//            } catch (InputMismatchException e) {
+//                System.out.println("You didn't input the correct thing " + e);
+//            }
+//
+//
+//        }
+//
+//        else if(userChoice == 2){
+//            mainMenu.purchaseMenu();
+//        }
 
     }
+
+    public static void run(){
+
+        boolean isWrongAnswer;
+        do {
+            Scanner sc = new Scanner(System.in);
+            isWrongAnswer = false;
+            Menu main = new Menu();
+            main.mainMenu();
+            int choice = sc.nextInt();
+            switch (choice) {
+                case 1:
+                    main.mainMenu();
+                case 2:
+                    main.purchaseMenu();
+                    break;
+                case 3:
+                    break;
+                case 4:
+                    main.secretMenu();
+                    break;
+                default:
+                    System.out.println("choose from 1 to 3");
+                    isWrongAnswer = true;
+            }
+        } while (isWrongAnswer);
+    }
+
 }
