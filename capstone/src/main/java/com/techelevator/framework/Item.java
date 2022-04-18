@@ -1,10 +1,12 @@
-package com.techelevator.view;
+package com.techelevator.framework;
+
+import java.math.BigDecimal;
 
 public class Item {
 
     private String productName;
     private String productLocation;
-    private double price;
+    private BigDecimal price;
     private int amtAvailable = 5;
 
     /**
@@ -18,9 +20,19 @@ public class Item {
 
     }
 
+    public int buyItem() throws ArithmeticException {
+        if(this.amtAvailable == 0){
+            System.out.println("Too slow, Try again!");
+            throw new ArithmeticException();
+        } else {
+            return --this.amtAvailable;
+        }
+
+    }
+
     public Item(String productName,
                 String productLocation,
-                double price){
+                BigDecimal price){
         this.productName = productName;
         this.productLocation = productLocation;
         this.price = price;
@@ -35,7 +47,7 @@ public class Item {
         return productLocation;
     }
 
-    public double getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
 
@@ -43,9 +55,6 @@ public class Item {
         return amtAvailable;
     }
 
-    public void sellItem(){
-        this.amtAvailable -= 1;
-    }
 
     public String playSound(){
         return "";
